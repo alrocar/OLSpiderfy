@@ -17,7 +17,7 @@
 
         <script src="./ol/OpenLayers.js"></script>
         <script src="./AnimatedCluster.js"></script>
-        <script src="./SpiderfyStrategy.js"></script>
+        <script src="./Spiderfy.js"></script>
 
         <style>
             #header {
@@ -192,6 +192,21 @@
                 styleMap:  new OpenLayers.StyleMap(style)
             });
             map2.addLayer(vector2);
+
+            var control = new OpenLayers.Control.SelectFeature(
+                [vector2]
+            );
+            
+            map2.addControl(control);
+            control.activate();
+
+            var spiderfyControl = new OpenLayers.Control.Spiderfy({
+                selectControl: control
+            });
+
+            map2.addControl(spiderfyControl);
+            spiderfyControl.activate();
+            
             
             // Create some random features
             var features = [];
